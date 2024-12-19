@@ -18,6 +18,7 @@ Garud-Nirdeshak is a revolutionary drone-assisted navigation system designed to 
 - 🚑 Emergency vehicle tracking
 - 🤖 AI-powered traffic light control
 
+
 ## 🛠️ Tech Stack
 <p align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
@@ -65,9 +66,9 @@ garud-nirdeshak/
 └── ...
 ```
 ## 📊 Project Stats
-![GitHub stars](https://img.shields.io/github/stars/your-username/garud-nirdeshak?style=social)
-![GitHub forks](https://img.shields.io/github/forks/your-username/garud-nirdeshak?style=social)
-![GitHub issues](https://img.shields.io/github/issues/your-username/garud-nirdeshak)
+![GitHub stars](https://img.shields.io/github/stars/Rudra00codes/Garud-Nirdeshak?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Rudra00codes/Garud-Nirdeshak?style=social)
+![GitHub issues](https://img.shields.io/github/issues/Rudra00codes/Garud-Nirdeshak)
 
 
 ## 🌟 Features in Detail
@@ -95,12 +96,10 @@ garud-nirdeshak/
 ## 🤝 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-<a href="https://github.com/your-username/garud-nirdeshak/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=your-username/garud-nirdeshak" />
+<a href="https://github.com/Rudra00codes/Garud-Nirdeshak/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Rudra00codes/Garud-Nirdeshak" />
 </a>
 
-## Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
