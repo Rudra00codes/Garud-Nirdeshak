@@ -10,6 +10,19 @@ Garud-Nirdeshak is a revolutionary drone-assisted navigation system designed to 
   <img src="path-to-demo.gif" alt="Garud-Nirdeshak Demo" width="600px" />
 </p>
 
+## 🎥 Video Showcase
+
+ttps://github.com/Rudra00codes/Garud-Nirdeshak/assets/video-showcase.mp4
+
+
+Watch our comprehensive dashboard demo to see Garud-Nirdeshak in action! The video demonstrates:
+
+ 📊 Real-time traffic monitoring interface
+ 🛣️ Dynamic route optimization
+ 🚨 Emergency response coordination
+ 🎮 Interactive control features
+
+
 ## ✨ Key Features
 - 🎥 Real-time drone video feed
 - 🗺️ Interactive map visualization
