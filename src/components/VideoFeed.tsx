@@ -1,33 +1,71 @@
 // src/components/VideoFeed.tsx
-import React, { useState } from 'react';
-import LoadingSpinner from './LoadingSpinner';
+import React, { useEffect, useRef } from 'react';
 
 const VideoFeed: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
+    const signalingServerRef = useRef<WebSocket | null>(null);
 
-  return (
-    <div className="relative w-full h-full">
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-10">
-          <LoadingSpinner size="large" color="blue" />
-        </div>
-      )}
-      <video
-        className="w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        poster="https://images.unsplash.com/photo-1506947411487-a56738267384?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-        onLoadedData={() => setIsLoading(false)}
-      >
-        <source src="your-rtsp-stream-url" type="application/x-rtsp" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="absolute top-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full">
-        DRONE VIEW
-      </div>
-    </div>
-  );
+    useEffect(() => {
+        const startVideo = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                if (videoRef.current) {
+                    videoRef.current.srcObject = stream;
+
+                    // Create a new RTCPeerConnection
+                    peerConnectionRef.current = new RTCPeerConnection();
+
+                    // Add the video track to the peer connection
+                    stream.getTracks().forEach((track) => {
+                        peerConnectionRef.current?.addTrack(track, stream);
+                    });
+
+                    // Handle incoming ICE candidates
+                    peerConnectionRef.current.onicecandidate = (event) => {
+                        if (event.candidate && signalingServerRef.current) {
+                            signalingServerRef.current.send(JSON.stringify({ candidate: event.candidate }));
+                        }
+                    };
+
+                    // Handle remote stream
+                    peerConnectionRef.current.ontrack = (event) => {
+                        const remoteVideo = document.createElement('video');
+                        remoteVideo.srcObject = event.streams[0];
+                        remoteVideo.autoplay = true;
+                        document.body.appendChild(remoteVideo);
+                    };
+                }
+            } catch (error) {
+                console.error('Error accessing media devices.', error);
+            }
+        };
+
+        startVideo();
+
+        // Set up signaling server connection
+        signalingServerRef.current = new WebSocket('ws://localhost:3000');
+        signalingServerRef.current.onmessage = async (message) => {
+            const data = JSON.parse(message.data);
+            if (data.offer) {
+                // Handle incoming offer
+                if (peerConnectionRef.current) {
+                    await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(data.offer));
+                    const answer = await peerConnectionRef.current.createAnswer();
+                    await peerConnectionRef.current.setLocalDescription(answer);
+                    signalingServerRef.current?.send(JSON.stringify({ answer }));
+                }
+            } else if (data.answer) {
+                // Handle incoming answer
+                await peerConnectionRef.current?.setRemoteDescription(new RTCSessionDescription(data.answer));
+            } else if (data.candidate) {
+                // Handle incoming ICE candidate
+                await peerConnectionRef.current?.addIceCandidate(new RTCIceCandidate(data.candidate));
+            }
+        };
+    }, []);
+
+    return <video ref={videoRef} autoPlay playsInline />;
 };
 
 export default VideoFeed;

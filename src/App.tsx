@@ -111,7 +111,7 @@ function App() {
 
             {/* Video Feed */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <VideoFeed />
+              <VideoFeed /> {/* Integrate VideoFeed here */}
             </div>
 
             {/* Drone Status */}
