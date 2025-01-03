@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Camera Stream</title>
+</head>
+<body>
+    <video id="localVideo" autoplay playsinline></video>
+    <script>
+        const signalingServerUrl = 'ws://192.168.29.153:3000'; //  backend URL
+        const signalingServer = new WebSocket(signalingServerUrl);
+        signalingServer.onopen = () => {
+            console.log('WebSocket connection established');
+        };
+        let localStream;
+        let peerConnection;
+
+        async function startCamera() {
+            localStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            document.getElementById('localVideo').srcObject = localStream;
+
+            // Create a new RTCPeerConnection
+            peerConnection = new RTCPeerConnection();
+
+            // Add tracks to the peer connection
+            localStream.getTracks().forEach(track => {
+                peerConnection.addTrack(track, localStream);
+            });
+
+            // Handle ICE candidates
+            peerConnection.onicecandidate = event => {
+                if (event.candidate) {
+                    signalingServer.send(JSON.stringify({ candidate: event.candidate }));
+                }
+            };
+
+            // Create an offer and send it to the signaling server
+            const offer = await peerConnection.createOffer();
+            await peerConnection.setLocalDescription(offer);
+            signalingServer.send(JSON.stringify({ offer }));
+        }
+
+        signalingServer.onmessage = async message => {
+            const data = JSON.parse(message.data);
+            if (data.answer) {
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
+            } else if (data.candidate) {
+                await peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
+            }
+        };
+
+        startCamera();
+    </script>
+</body>
+</html>
