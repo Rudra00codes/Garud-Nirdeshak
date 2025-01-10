@@ -2,15 +2,19 @@
 import React from 'react';
 import { Layer, Source } from 'react-map-gl';
 
-const TrafficOverlay: React.FC = () => {
+interface TrafficOverlayProps {
+  showTraffic: boolean;
+  trafficData: GeoJSON.FeatureCollection;
+}
+
+const TrafficOverlay: React.FC<TrafficOverlayProps> = ({ showTraffic, trafficData }) => {
+  if (!showTraffic) return null; // Don't render if traffic is not shown
+
   return (
     <Source
       id="traffic"
       type="geojson"
-      data={{
-        type: 'FeatureCollection',
-        features: [] // Traffic data features
-      }}
+      data={trafficData}
     >
       <Layer
         id="traffic-heat"
