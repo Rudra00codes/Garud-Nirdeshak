@@ -1,14 +1,12 @@
 // src/App.tsx
 import React, { useState, useEffect } from 'react';
-// import { MapPin, Menu, Home, Book, HelpCircle, AlertTriangle, Settings } from 'lucide-react';
 import DroneMap from './components/DroneMap';
 import VideoFeed from './components/VideoFeed';
 import SideNav from './components/SideNav';
 import Statistics from './components/Statistics';
 import Controls from './components/Controls';
-import EmergencyAlert from './components/EmergencyAlert';
 
-// Add these new imports
+
 interface LoadingSpinnerProps {
   size?: 'small' | 'medium' | 'large';
   color?: string;
@@ -16,7 +14,7 @@ interface LoadingSpinnerProps {
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   size = 'medium',
-  color = 'blue'
+  color = 'black'
 }) => {
   const sizeClasses = {
     small: 'w-4 h-4',
@@ -43,7 +41,11 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [showEmergencyAlert, setShowEmergencyAlert] = useState(false);
+
+  useEffect(() => {
+    // Set dark mode as default
+    document.documentElement.classList.add('dark');
+  }, []);
 
   useEffect(() => {
     // Simulate loading progress
@@ -65,12 +67,7 @@ function App() {
     return (
       <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-100">
         <div className="text-center space-y-8">
-          {/* Optional: Add your logo here */}
-          {/* <img src="/your-logo.png" alt="Logo" className="h-16 w-auto mb-8" /> */}
-
           <LoadingSpinner size="large" color="blue" />
-
-          {/* Progress Bar */}
           <div className="w-64">
             <div className="bg-gray-200 rounded-full h-2.5 overflow-hidden">
               <div
@@ -79,8 +76,6 @@ function App() {
               />
             </div>
           </div>
-
-          {/* Loading Text */}
           <div className="space-y-2">
             <p className="text-gray-600 font-semibold animate-pulse">
               Loading Drone Dashboard...
@@ -95,26 +90,17 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-900 transition-colors duration-300">
       {/* Main Layout */}
-      <div className="grid grid-cols-[auto_1fr] h-screen"> {/* Changed from fixed width to auto */}
+      <div className="grid grid-cols-[auto_1fr] h-screen">
         <SideNav />
-
         {/* Main Content */}
         <div className="grid grid-rows-[auto_1fr_auto] gap-4 p-4">
           {/* Top Section - Map Preview, Video Feed, and Drone Status */}
           <div className="grid grid-cols-[300px_1fr_300px] gap-4 h-[300px]">
-            {/* Mini Map */}
-            <div className="bg-white rounded-lg shadow-md p-2">
-              <DroneMap minimap={true} />
-            </div>
-
-            {/* Video Feed */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <VideoFeed /> {/* Integrate VideoFeed here */}
+              <VideoFeed />
             </div>
-
-            {/* Drone Status */}
             <div className="bg-white rounded-lg shadow-md p-4">
               <div className="flex flex-col h-full">
                 <img
@@ -122,28 +108,16 @@ function App() {
                   alt="Drone"
                   className="w-full h-40 object-cover rounded-lg mb-4"
                 />
-                <EmergencyAlert
-                  show={showEmergencyAlert}
-                  onClose={() => setShowEmergencyAlert(false)}
-                />
               </div>
             </div>
           </div>
-
-          {/* Middle Section - Main Map */}
           <div className="grid grid-cols-[250px_1fr_300px] gap-4">
-            {/* Route Instructions */}
             <div className="bg-white rounded-lg shadow-md p-4 overflow-y-auto">
               <h3 className="font-semibold mb-4">Route Instructions</h3>
-              {/* Route details component would go here */}
             </div>
-
-            {/* Main Map */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <DroneMap />
             </div>
-
-            {/* Statistics and Controls */}
             <div className="flex flex-col gap-4">
               <Statistics />
               <Controls />

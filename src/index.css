@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for dark mode */
+body {
+  @apply bg-gray-900; /* Set dark background */
+  color: black; /* Set text color to black */
+}
+
+/* Dark mode styles */
+.dark body {
+  @apply bg-gray-900; /* Dark background */
+  color: black; /* Keep text color black */
+}
+
+/* Additional styles for other elements as needed */
+.text-original {
+  color: black; /* Original text color */
+}
+
+.icon-original {
+  color: black; /* Original icon color */
+}
+
+.btn {
+  @apply px-4 py-2 bg-blue-500 text-white rounded;
+}
+
