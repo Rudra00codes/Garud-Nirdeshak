@@ -17,7 +17,7 @@ const SideNav: React.FC = () => {
 
   return (
     <nav 
-      className={`bg-white shadow-md flex flex-col items-center py-4 gap-6 transition-all duration-300 ease-in-out ${
+      className={`bg-white dark:bg-gray-300 shadow-md flex flex-col items-center py-4 gap-6 transition-all duration-300 ease-in-out ${
         isExpanded ? 'w-[200px]' : 'w-[60px]'
       }`}
     >

@@ -1,11 +1,13 @@
 // src/App.tsx
 import React, { useState, useEffect } from 'react';
-import DroneMap from './components/DroneMap';
+// import DroneMap from './components/DroneMap';
 import VideoFeed from './components/VideoFeed';
 import SideNav from './components/SideNav';
 import Statistics from './components/Statistics';
 import Controls from './components/Controls';
-
+import GoogleMapComponent from './components/GoogleMapComponent';
+import AlertsComponent from './components/AlertsComponent';
+import NotificationsComponent from './components/NotificationsComponent';
 
 interface LoadingSpinnerProps {
   size?: 'small' | 'medium' | 'large';
@@ -41,6 +43,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [notifications, setNotifications] = useState<{ message: string }[]>([]);
 
   useEffect(() => {
     // Set dark mode as default
@@ -61,6 +64,10 @@ function App() {
     }, 500);
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    setNotifications([{ message: "New update available!" }, { message: "Server maintenance scheduled." }]);
   }, []);
 
   if (isLoading) {
@@ -96,32 +103,36 @@ function App() {
         <SideNav />
         {/* Main Content */}
         <div className="grid grid-rows-[auto_1fr_auto] gap-4 p-4">
-          {/* Top Section - Map Preview, Video Feed, and Drone Status */}
-          <div className="grid grid-cols-[300px_1fr_300px] gap-4 h-[300px]">
+          {/* Top Section - Drone Status, Video Feed, Notifications, and Alerts */}
+          <div className="grid grid-cols-[1.4fr_2fr_1fr_0.5fr] gap-4 h-[300px]">
+            <div className="bg-white dark:bg-gray-300 rounded-lg shadow-md p-4">
+              <div className="flex flex-col h-full">
+                <iframe src='https://my.spline.design/drone-4907c90e03e5bdc622888d0b6e9eb4c3/'  width='100%' height='100%'></iframe>
+                <h3 className="font-semibold">Drone Status</h3>
+                {/* Add more drone status details here */}
+              </div>
+            </div>
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <VideoFeed />
+            </div>  
+            <div className="bg-white dark:bg-gray-400 rounded-lg shadow-md overflow-hidden">
+              <NotificationsComponent notifications={notifications} />
             </div>
-            <div className="bg-white rounded-lg shadow-md p-4">
-              <div className="flex flex-col h-full">
-                <img
-                  src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&h=200&q=80"
-                  alt="Drone"
-                  className="w-full h-40 object-cover rounded-lg mb-4"
-                />
-              </div>
+            <div className="bg-white dark:bg-gray-400 rounded-lg shadow-md overflow-hidden">
+              <AlertsComponent />
             </div>
           </div>
           <div className="grid grid-cols-[250px_1fr_300px] gap-4">
-            <div className="bg-white rounded-lg shadow-md p-4 overflow-y-auto">
+            <div className="bg-white dark:bg-gray-300 rounded-lg shadow-md p-4 overflow-y-auto">
               <h3 className="font-semibold mb-4">Route Instructions</h3>
             </div>
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <DroneMap />
+              <GoogleMapComponent />
             </div>
             <div className="flex flex-col gap-4">
               <Statistics />
               <Controls />
-            </div>
+            </div>  
           </div>
         </div>
       </div>
