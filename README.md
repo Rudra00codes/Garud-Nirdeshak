@@ -1,4 +1,4 @@
-# 🦅 Garud-Nirdeshak: Drone-Assisted Navigation System
+# 🦅 Garud-Nirdeshak: Drone-Assisted Disaster-Response System
 
 ![Project Banner](path-to-banner-image.png)
 
@@ -21,6 +21,10 @@ The video demonstrates:
 
 
 ## ✨ Key Features
+
+<div style="display: flex; gap: 2rem; align-items: flex-start;">
+<div style="flex: 3;">
+
 - 🎥 Real-time drone video feed
 - 🎤 Real-time audio capturing and analysis for human-like screams
 - 🌡️ Infrared scanning to detect vital signs
@@ -29,6 +33,12 @@ The video demonstrates:
 - 🚑 Emergency vehicle tracking and Live traffic monitoring for emergency vehicle routing
 - 🤖 AI-powered decision support for emergency responders
 
+</div>
+
+<div style="flex: 2;">
+    <img src="assets/images/garud-nirdeshak-card.png" alt="Garud Nirdeshak Drone" style="max-width: 100%; height: auto; position: sticky; top: 20px;"/>
+</div>
+</div>
 
 <hr><br>
 
@@ -88,40 +98,60 @@ The **Garud-Nirdeshak Dashboard** serves as the central hub for monitoring and m
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher) 📦
-- npm or yarn 🔧
+- Python 3.8 or higher(3.11 specifically as the yolov8 works with this Python version only) 
+- Node.js (v14 or higher)
+- npm 
+- Webcam access
+- Git
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/garud-nirdeshak.git
-   ```
-
-2. **Navigate to the project directory**
-   ```bash
    cd garud-nirdeshak
    ```
 
-3. **Install backend dependencies**
-   Navigate to the backend directory (if applicable) and install dependencies:
-   ```bash
-   cd garud-nirdeshak-backend
-   npm install
-   ```
 
-4. **Start the backend server**
-   Run the signaling server (if applicable):
+2. **Backend Setup**
    ```bash
-   node signalingServer.js
-   ```
+   # Navigate to backend directory
+   cd backend
 
-5. **Install frontend dependencies**
-   Navigate back to the frontend directory and install dependencies:
-   ```bash
-   cd ../frontend  # Adjust this path based on your project structure
-   npm install
+   # Create virtual environment
+   python -m venv venv
+
+   # Activate virtual environment
+   # On Windows:
+   venv\Scripts\activate
+   # On Mac/Linux:
+   source venv/bin/activate
+
+   # Install required packages
+   pip install flask flask-cors opencv-python ultralytics numpy
+
+   # Start the Flask server
+   python app.py
    ```
+   The backend server will run on http://localhost:5000
+
+<br>
+
+3. **Frontend Setup**
+   ```bash
+   # Open a new terminal
+   # Navigate to frontend directory
+   cd frontend
+
+   # Install dependencies
+   npm install
+
+   # Start the development server
+   npm start
+   ```
+   The frontend will run on http://localhost:3000 
+   
+   <br>
 
 6. **Start the development server**
    ```bash
@@ -129,7 +159,43 @@ The **Garud-Nirdeshak Dashboard** serves as the central hub for monitoring and m
    ```
 
 ### Running the Application
-- Open your web browser and navigate to `http://localhost:3000` (or the port specified in your frontend configuration) to access the application.
+
+1. **Start Backend Server**
+   - Ensure you're in the backend directory with activated virtual environment
+   - Run `python app.py`
+   - The server should start and display "Running on http://localhost:5000"
+
+2. **Start Frontend Development Server**
+   - In a new terminal, navigate to the frontend directory
+   - Run `npm start`
+   - Your default browser should open to http://localhost:3000
+
+3. **Verify Setup**
+   - You should see the dashboard with the video feed component
+   - Click the "Start" button to begin video streaming
+   - Try different modes using the mode selection buttons
+
+
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Webcam Access Error**
+   - Ensure no other application is using the webcam
+   - Check browser permissions for camera access
+   - Verify webcam is properly connected
+
+2. **Backend Connection Issues**
+   - Verify both servers are running
+   - Check console for CORS errors
+   - Ensure correct ports are being used
+
+3. **Model Loading Issues**
+   - First run might take longer (downloading YOLO model)
+   - Check Python console for error messages
+   - Verify internet connection for initial model download
+
 
 ## 📁 Project Structure
 ```
@@ -144,10 +210,25 @@ garud-nirdeshak/
 │ └── 📱 App.tsx
 ├── 📂 public/
 ├── 📂 garud-nirdeshak-backend/
-│ ├── signalingServer.js
-│ └── ...
+│ ├── app.py
+│ └── requirements.txt ... 
 └── ...
 ```
+
+## 🛠️ Tech Stack
+- **Frontend**:
+  - React with TypeScript
+  - Tailwind CSS
+  - Axios for API calls
+
+- **Backend**:
+  - Flask
+  - OpenCV
+  - YOLOv8
+  - NumPy
+
+<br>
+
 ## 📊 Project Stats
 ![GitHub stars](https://img.shields.io/github/stars/Rudra00codes/Garud-Nirdeshak?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Rudra00codes/Garud-Nirdeshak?style=social)
@@ -156,16 +237,38 @@ garud-nirdeshak/
 
 ## 🌟 Features in Detail
 
-
-
-### 🎯 Real-time Victim Detection
+### 🎥 Advanced Video Feed & Detection System
 <details>
 <summary>Click to expand</summary>
 <br>
-<img src="path-to-feature-image.png" alt="Victim Detection Demo" width="400px"/>
-- Real-time audio analysis for detecting screams.
-- Infrared scanning capabilities for identifying vital signs.
+<img src="path-to-video-feed-demo.png" alt="Video Feed Demo" width="400px"/>
+
+#### Vision Modes
+- **Normal Mode**: Standard high-resolution video feed
+- **Grayscale Mode**: Enhanced contrast for better object detection
+- **Night Vision Mode**: Improved visibility in low-light conditions
+- **Thermal Mode**: Heat signature detection for victim identification
+- **Infrared Mode**: Deep scanning for hidden obstacles or victims
+
+#### Detection Capabilities
+- Real-time object detection using Lightweight YOLOv8 model
+- Human presence detection in challenging conditions
+- Movement pattern analysis
+- Distance estimation and depth perception
+
+#### Key Features
+- Real-time processing and alerts
+- Location marking on interactive map
+- Automatic emergency response triggering
+- Historical data logging for analysis
+
+#### Coordination Features
+- Real-time emergency vehicle tracking
+- Dynamic route optimization
+- Inter-agency communication platform
+- Resource allocation management
 </details>
+
 
 ### 🚦 Emergency Response Coordination
 <details>
@@ -181,10 +284,58 @@ garud-nirdeshak/
 <summary>Click to expand</summary>
 <br>
 <img src="path-to-feature-image.png" alt="Traffic Management Demo" width="400px"/>
-- Automated traffic light control
-- Congestion prediction
-- Emergency corridor creation
+- Intelligent traffic light management
+- Real-time congestion monitoring
+- Predictive traffic flow analysis
 </details>
+
+
+#### Advanced Features for Future scope
+- Machine learning-based congestion prediction
+- Automated emergency vehicle path clearing
+- Integration with city traffic systems
+- Historical data analysis for optimization
+</details>
+
+### 📊 Analytics and Reporting
+<details>
+<summary>Click to expand</summary>
+<br>
+<img src="path-to-analytics-demo.png" alt="Analytics Dashboard Demo" width="400px"/>
+
+#### Real-time Analytics
+- Response time metrics
+- Resource utilization stats
+- Success rate tracking
+- System performance monitoring
+
+#### Reporting Features
+- Automated incident reports
+- Performance analytics
+- Resource allocation insights
+- Trend analysis and predictions
+</details>
+
+
+### 🔐 Security and Privacy(Updating Soon)
+<details>
+<summary>Click to expand</summary>
+<br>
+<img src="path-to-security-demo.png" alt="Security Features Demo" width="400px"/>
+
+#### Security Features
+- End-to-end encryption
+- Role-based access control
+- Audit logging
+- Data anonymization
+
+#### Privacy Measures
+- GDPR compliance
+- Data retention policies
+- Privacy-first design
+- Secure data transmission
+</details>
+
 
 ## 🤝 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -193,7 +344,22 @@ Contributions are welcome! Please feel free to submit a Pull Request.
   <img src="https://contrib.rocks/image?repo=Rudra00codes/Garud-Nirdeshak" />
 </a>
 
+## How to contribute to the Repository
 
+1. Fork the repository
+2. Create your feature branch
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. Commit your changes
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+4. Push to the branch
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. Open a Pull Request
 ## 📝 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -215,6 +381,9 @@ furnished to do so, subject to the following conditions:
 
 ## 🙏 Acknowledgments
 - Special thanks to all contributors
+- YOLOv8 for object detection
+- OpenCV for image processing
+- All contributors and maintainers
 - Inspired by the need for smarter emergency response systems
 - Built with ❤️ for saving lives
 
