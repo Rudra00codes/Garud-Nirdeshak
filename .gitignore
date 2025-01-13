@@ -3,6 +3,22 @@ node_modules/
 /.pnp
 .pnp.js
 
+# Update .gitignore (create if not exists)
+echo "# Virtual Environment
+venv/
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dll
+*.lib
+
+# YOLOv8 model
+yolov8n.pt" > .gitignore
+
+
 # Virtual Environment
 venv/
 env/
