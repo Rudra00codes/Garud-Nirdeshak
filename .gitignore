@@ -1,3 +1,5 @@
+cat > .gitignore << EOL
+
 # Dependencies
 node_modules/
 /.pnp
@@ -21,17 +23,19 @@ yolov8n.pt" > .gitignore
 
 # Virtual Environment
 venv/
-env/
+**/venv/
 ENV/
 .env
 .venv
-**/venv/
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.pyd
+*.dll
+*.lib
 
 # Distribution / packaging
 dist/
@@ -42,10 +46,12 @@ build/
 /dist
 /build
 
-# Large files and dependencies
+# Large files
 *.pyd
-*.dll
-*.lib
+cv2.pyd
+torch_cpu.dll
+dnnl.lib
+*.pt
 node_modules/
 
 # Environment variables
