@@ -3,9 +3,34 @@ node_modules/
 /.pnp
 .pnp.js
 
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+.venv
+**/venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
 # Production build
 /dist
 /build
+
+# Large files and dependencies
+*.pyd
+*.dll
+*.lib
+node_modules/
 
 # Environment variables
 .env
