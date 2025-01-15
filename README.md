@@ -1,6 +1,7 @@
 # 🦅 Garud-Nirdeshak: Drone-Assisted Disaster-Response System
 
-![Project Banner](path-to-banner-image.png)
+
+![Project Banner](https://github.com/Rudra00codes/Garud-Nirdeshak/blob/main/assets/images/Black%20and%20White%20Holographic%20Future%20Technology%20Banner.png)  
 
 
 ## 🎯 Overview
@@ -11,7 +12,7 @@ Garud-Nirdeshak is a revolutionary drone-assisted navigation system designed to 
 </p>
 
 ## 🎥 Video Showcase
-[Watch our comprehensive dashboard demo to see Garud-Nirdeshak in action!](https://github.com/Rudra00codes/Garud-Nirdeshak/assets/video-showcase.mp4)
+[Watch our comprehensive dashboard demo to see Garud-Nirdeshak in action!](assets\videos\Garud-Nirdeshak_Demo.mp4)
 
 The video demonstrates:
 - 📊 Real-time traffic monitoring interface
