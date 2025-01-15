@@ -12,7 +12,7 @@ Garud-Nirdeshak is a revolutionary drone-assisted navigation system designed to 
 </p>
 
 ## 🎥 Video Showcase
-[Watch our comprehensive dashboard demo to see Garud-Nirdeshak in action!](assets\videos\Garud-Nirdeshak_Demo.mp4)
+[Watch our comprehensive dashboard demo to see Garud-Nirdeshak in action!](./assets/videos/Garud-Nirdeshak_Demo.mp4)
 
 The video demonstrates:
 - 📊 Real-time traffic monitoring interface
