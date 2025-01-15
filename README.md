@@ -1,7 +1,6 @@
 # 🦅 Garud-Nirdeshak: Drone-Assisted Disaster-Response System
 
-![Project Banner](path-to-banner-image.png)
-
+![Project Banner](assets/images/Black%20and%20White%20Holographic%20Future%20Technology%20Banner.png)
 
 ## 🎯 Overview
 Garud-Nirdeshak is a revolutionary drone-assisted navigation system designed to optimize emergency vehicle routing through real-time traffic monitoring and AI-powered path optimization.
