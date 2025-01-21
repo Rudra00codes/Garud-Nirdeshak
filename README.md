@@ -237,9 +237,8 @@ garud-nirdeshak/
 
 ## 📊 Project Stats
 ![GitHub stars](https://img.shields.io/github/stars/Rudra00codes/Garud-Nirdeshak?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Rudra00codes/Garud-Nirdeshak?style=social)
-![GitHub issues](https://img.shields.io/github/issues/Rudra00codes/Garud-Nirdeshak)
 
+![Alt](https://repobeats.axiom.co/api/embed/4142df5fa7415525560fbc1db5acc8f3273f888f.svg "Repobeats analytics image")
 
 ## 🌟 Features in Detail
 
